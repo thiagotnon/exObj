@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/all.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <title>Adicionar | Editar</title>
+    <style>
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+        .card {
+            border-radius: 30px;
+        }
+        .btn-save {
+            background: #55efc4;
+            color: #00b894;
+
+        }
+        .card {
+
+        }
+        .card-header {
+            border-radius: 30px 30px 0 0 !important;
+        }
+        .card-footer,
+        .btn-save {
+            border-radius: 0 0 30px 30px !important;
+            border: 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-4 col-8 offset-md-4 offset-2">
+            <form method="post">
+                <div class="card shadow border-0">
+                    <div class="card-body border-top-0 pb-2">
+                        <input type="hidden" id="id">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="far fa-address-card"></i></span>
+                            </div>
+                            <input type="text" class="form-control"  id="nome" placeholder="Nome" aria-label="Nome"  aria-describedby="nome" required>
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="far fa-address-book"></i></span>
+                            </div>
+                            <textarea class="form-control"  id="biografia" placeholder="Biografia" aria-label="Biografia" required></textarea>
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-user-graduate"></i></span>
+                            </div>
+                            <input type="text" class="form-control"  id="curso" placeholder="Curso" aria-label="Curso" aria-describedby="curso" required>
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-fingerprint"></i></span>
+                            </div>
+                            <input type="text" class="form-control"  id="matricula" placeholder="Matrícula" aria-label="Matrícula" aria-describedby="matricula" required>
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="far fa-envelope"></i></span>
+                            </div>
+                            <input type="email" class="form-control"  id="email" placeholder="E-mail" aria-label="E-mail" aria-describedby="email" required>
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-mobile-alt"></i></span>
+                            </div>
+                            <input type="text" class="form-control"  id="telefone" placeholder="Telefone" aria-label="Telefone" aria-describedby="telefone" required>
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-mouse"></i></span>
+                            </div>
+                            <input type="text" class="form-control"  id="site" placeholder="Site" aria-label="Site" aria-describedby="site" required>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-white p-0 border-0">
+                        <div class="btn-group btn-block" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-light btn-save font-weight-bold" id="salvar"><i class="fas fa-user-check"></i> Salvar</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/jquery.maskedinput.js"></script>
+<script src="assets/js/custom.js"></script>
+<script>
+    function getParameterById(id,url){
+        if(!url) url = window.location.href;
+        id = id.replace(/[\[\]]/g, '\\$&');
+        var regex = new RegExp('[?&]' + id + '(=([^&#]*)|&|#|$)'),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+    $(function () {
+        $('#telefone').mask('(99) 9.9999.9999');
+
+        var id = getParameterById('id');
+        alunos = localStorage.getItem('alunos');
+        alunos = alunos ? JSON.parse(alunos) : [];
+        console.log(id);
+        // var posicao = $(this).attr('posicao');
+
+        var aluno = alunos[id];
+        console.log(JSON.stringify(aluno));
+
+        $('#id').val(id);
+        $('#nome').val(aluno.nome);
+        $('#matricula').val(aluno.matricula);
+        $('#biografia').val(aluno.biografia);
+        $('#curso').val(aluno.curso);
+        $('#telefone').val(aluno.telefone);
+        $('#email').val(aluno.email);
+        $('#site').val(aluno.site);
+    })
+</script>
+</body>
+</html>
